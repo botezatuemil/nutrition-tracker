@@ -1,0 +1,142 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id         Int         @id @default(autoincrement())
+  fullname   String
+  email      String
+  password   String
+  journal    journal[]
+  profile    profile?
+  recipes    recipe[]
+  water_goal water_goal?
+}
+
+model profile {
+  id           Int       @id @default(autoincrement())
+  gender       Boolean
+  weight       Float
+  height       Float
+  age          Int
+  nutrients_id Int       @unique
+  user_id      Int       @unique
+  goal         goal
+  activity     activity
+  nutrients    nutrients @relation(fields: [nutrients_id], references: [id], onDelete: Cascade)
+  user         users     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model journal {
+  id       Int         @id @default(autoincrement())
+  date_id  Int
+  user_id  Int
+  date     date        @relation(fields: [date_id], references: [id], onDelete: Cascade)
+  user     users       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  mealType meal_type[]
+  Water    water?
+  @@unique([user_id, date_id])
+}
+
+model date {
+  id      Int       @id @default(autoincrement())
+  date    DateTime  @db.Date
+  journal journal[]
+}
+
+model meal_type {
+  id         Int      @id @default(autoincrement())
+  hour       DateTime
+  journal_id Int
+  type       type
+  journal    journal  @relation(fields: [journal_id], references: [id], onDelete: Cascade)
+  meal       meal[]
+}
+
+model meal {
+  id           Int           @id @default(autoincrement())
+  name         String
+  meal_type_id Int?
+  nutrient_id  Int?          @unique
+  amount       Int
+  meal_type    meal_type?    @relation(fields: [meal_type_id], references: [id], onDelete: Cascade)
+  nutrients    nutrients?    @relation(fields: [nutrient_id], references: [id], onDelete: Cascade)
+  ingredients  ingredients[]
+  Recipes      recipe[]
+}
+
+model ingredients {
+  id           Int       @id @default(autoincrement())
+  name         String
+  amount       Int
+  meal_id      Int
+  nutrients_id Int       @unique
+  meal         meal      @relation(fields: [meal_id], references: [id], onDelete: Cascade)
+  nutrients    nutrients @relation(fields: [nutrients_id], references: [id], onDelete: Cascade)
+}
+
+model nutrients {
+  id          Int          @id @default(autoincrement())
+  calories    Int
+  protein     Int
+  carbs       Int
+  fat         Int
+  sugar       Int
+  ingredients ingredients?
+  meal        meal?
+  profile     profile?
+}
+
+model water {
+  id         Int     @id @default(autoincrement())
+  amount     Float
+  journal_id Int     @unique
+  journal    journal @relation(fields: [journal_id], references: [id])
+}
+
+model water_goal {
+  id      Int   @id @default(autoincrement())
+  liters  Float
+  users   users @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id Int   @unique
+}
+
+model recipe {
+  id         Int          @id @default(autoincrement())
+  meal_id    Int
+  user_id    Int
+  meal       meal         @relation(fields: [meal_id], references: [id], onDelete: Cascade)
+  user       users        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  favourites favourites[]
+}
+
+model favourites {
+  id        Int    @id @default(autoincrement())
+  recipe_id Int
+  recipe    recipe @relation(fields: [recipe_id], references: [id], onDelete: Cascade)
+}
+
+enum activity {
+  SEDENTARY
+  MODERATE
+  ACTIVE
+}
+
+enum goal {
+  LOSE
+  MANTAIN
+  GAIN
+}
+
+enum type {
+  BREAKFAST
+  LUNCH
+  DINNER
+  FASTFOOD
+  SNACK
+}

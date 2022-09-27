@@ -1,0 +1,50 @@
+import React from 'react'
+import {Nutrients} from '../../interfaces';
+
+const Footer: React.FC<{name: string, nutrients: Nutrients}> = (props) => {
+  return (
+    <div className="w-full min-h-[8vh] flex flex-row bg-white items-center ">
+    <div className="w-[25vw]  h-full flex flex-row items-center ml-[4vw] ">
+      <p className="font-semibold font-jakarta text-xs w-[8vw] ">
+        {props.name}
+      </p>
+    
+    </div>
+    
+    <div className="w-full flex flex-row space-x-[4vw] mr-[3vw] ml-[18vw]">
+      <div className="h-full flex flex-row items-center px-2 ">
+        <p className="font-semibold font-jakarta text-xs ">
+        {props.nutrients.calories}
+        </p>
+        
+      </div>
+      <div className=" h-full flex flex-row items-center  ">
+        <p className="font-semibold font-jakarta text-xs ">
+        {props.nutrients.protein}
+        </p>
+       
+      </div>
+      <div className="  h-full flex flex-row items-center ">
+        <p className="font-semibold font-jakarta text-xs ">
+        {props.nutrients.carbs}
+        </p>
+       
+      </div>
+      <div className="  h-full flex flex-row items-center ">
+        <p className="font-semibold font-jakarta text-xs ">
+        {props.nutrients.fat}
+        </p>
+        
+      </div>
+      <div className=" h-full flex flex-row items-center ">
+        <p className="font-semibold font-jakarta text-xs ">
+        {props.nutrients.sugar}
+        </p>
+        
+      </div>
+    </div>
+  </div>
+  )
+}
+
+export default Footer
