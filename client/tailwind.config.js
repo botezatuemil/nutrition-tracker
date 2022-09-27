@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        Jakarta: ["Plus Jakarta Sans", "sans-serif"],
+        jakarta: ["Plus Jakarta Sans", "sans-serif"],
       },
       backgroundImage: {
         'split-green': "linear-gradient(to right, #ABC5A3 6% , #EBF9E7 1%);",

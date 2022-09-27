@@ -1,15 +1,23 @@
 import {
   ChartComponent,
+  ColumnSeries,
+  DataLabel,
   DateTime,
   Inject,
   Legend,
+  LineSeries,
   SeriesCollectionDirective,
   SeriesDirective,
   SplineAreaSeries,
+  SplineSeries,
+  Tooltip,
 } from "@syncfusion/ej2-react-charts";
-import React from "react";
 
-const AreaChart = () => {
+import React from "react";
+import { LineChart } from "../../interfaces";
+
+const AreaChart: React.FC<{waterData: LineChart[] | undefined}> = (props) => {
+  console.log(props.waterData)
   let data1: any[] = [
     { x: new Date(2002, 0, 1), y: 2.2 },
     { x: new Date(2003, 0, 1), y: 3.4 },
@@ -30,30 +38,32 @@ const AreaChart = () => {
       style={{ textAlign: "center" }}
       primaryXAxis={{
         valueType: "DateTime",
-        labelFormat: "y",
+        labelFormat: "dd/MM",
         majorGridLines: { width: 0 },
-        intervalType: "Years",
+        intervalType: "Days",
         edgeLabelPlacement: "Shift",
       }}
       primaryYAxis={{
-        labelFormat: "{value}%",
+        labelFormat: "{value} L",
         lineStyle: { width: 0 },
-        maximum: 4,
-        interval: 1,
+        maximum: 5,
+        interval: 0.5,
         majorTickLines: { width: 0 },
         minorTickLines: { width: 0 },
       }}
+      tooltip={{ enable: true }}
       chartArea={{ border: { width: 0 } }}
     >
-      <Inject services={[SplineAreaSeries, DateTime, Legend]} />
+      <Inject services={[ColumnSeries, DateTime, Legend, Tooltip, DataLabel]} />
       <SeriesCollectionDirective>
         <SeriesDirective
-          dataSource={data1}
+          dataSource={props.waterData}
           xName="x"
           yName="y"
-          name="US"
+          name="Water"
           opacity={0.5}
-          type="SplineArea"
+          type="Column"
+          marker={{ dataLabel: { visible: true, position: 'Top', font: { fontWeight: '600', color: '#ffffff' } } }}
           width={2}
         ></SeriesDirective>
         

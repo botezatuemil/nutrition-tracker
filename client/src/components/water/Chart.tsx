@@ -64,7 +64,7 @@ const Chart = () => {
         <p className="text-lg font-Jakarta font-semibold ">
           Water drinked from {startDate} to {endDate}
         </p>
-        <AreaChart />
+        <AreaChart waterData={waterData}/>
       </div>
     </div>
   );

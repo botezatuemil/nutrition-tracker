@@ -18,7 +18,6 @@ import Journal from "../components/journal/Journal";
 import Recipes from "../components/recipes/Recipes";
 import Water from  "../components/water/Water";
 import History from "../components/history/History";
-import Favourites from "../components/favourites/Favourites";
 
 const Macro = () => {
   const [macros, setMacros] = useState<Boolean>(false);
@@ -26,7 +25,6 @@ const Macro = () => {
   const [recipes, setRecipes] = useState<Boolean>(false);
   const [water, setWater] = useState<Boolean>(false);
   const [history, setHistory] = useState<Boolean>(false);
-  const [favourites, setFavourites] = useState<Boolean>(false);
 
   const navigate = useNavigate();
 
@@ -36,7 +34,6 @@ const Macro = () => {
     setRecipes(false);
     setWater(false);
     setHistory(false);
-    setFavourites(false);
   };
 
   const handleNavigateSettings = () => {
@@ -45,7 +42,7 @@ const Macro = () => {
   return (
     
     <div className="flex w-full min-h-screen bg-white ">
-      <div className="flex w-[20vw]  bg-[#F2F4F6] items-center flex-col ">
+      <div className="flex w-[20vw]  bg-[#F2F4F6] items-center flex-col justify-between ">
         <div className="flex justify-center flex-row items-center h-[10vh] space-x-4">
           <Logo width={50} height={50} />
           <p className="font-bold font-Jakarta text-xl ">NutriTrack</p>
@@ -82,12 +79,7 @@ const Macro = () => {
             selected={history}
             cleanupFunction={cleanup}
           />
-          <Option
-            text="Favourites"
-            setSelected={setFavourites}
-            selected={favourites}
-            cleanupFunction={cleanup}
-          />
+          
         </div>
 
         <div className="flex flex-col w-full mt-[130px]  ">
@@ -109,7 +101,6 @@ const Macro = () => {
       {recipes && <Recipes/>}
       {water && <Water/>}
       {history && <History/>}
-      {favourites && <Favourites/>}
       
     </div>
   );

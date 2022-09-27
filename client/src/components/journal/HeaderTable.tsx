@@ -6,51 +6,53 @@ const HeaderTable = () => {
       <div className="w-[4vw] items-center  h-full flex">
         <CheckIcon className="mx-4" />
       </div>
-      <div className="w-[25vw]  h-full flex flex-row items-center  px-4 ">
+      <div className=" w-full flex ">
+      <div className="w-[10vw]  h-full flex flex-row items-center ml-4">
         <p className="font-semibold font-jakarta text-xs text-[#BBBDD2]">
           PRODUCTS
         </p>
         <ChevronDownIcon />
       </div>
-      <div className="w-[40vw]  h-full flex flex-row items-center px-2 ">
+      <div className="w-[5vw]  h-full flex flex-row items-center ">
         <p className="font-semibold font-jakarta text-xs text-[#BBBDD2]">
           AMOUNT
         </p>
         <ChevronDownIcon />
       </div>
-      <div className="w-full flex flex-row justify-between mr-[3vw]">
-        <div className="h-full flex flex-row items-center px-2 ">
+      
+        <div className="h-full flex flex-row items-center text-left ml-[11vw] w-[5vw] ">
           <p className="font-semibold font-jakarta text-xs text-[#BBBDD2]">
             KCAL
           </p>
           <ChevronDownIcon />
         </div>
-        <div className=" h-full flex flex-row items-center  ">
+        <div className=" h-full flex flex-row items-center text-left  w-[5vw] ">
           <p className="font-semibold font-jakarta text-xs text-[#BBBDD2]">
             PROTEIN
           </p>
           <ChevronDownIcon />
         </div>
-        <div className="  h-full flex flex-row items-center ">
+        <div className="  h-full flex flex-row items-center text-left  w-[5vw] ">
           <p className="font-semibold font-jakarta text-xs text-[#BBBDD2]">
             CARBS
           </p>
           <ChevronDownIcon />
         </div>
-        <div className="  h-full flex flex-row items-center ">
+        <div className="  h-full flex flex-row items-center text-left  w-[5vw] ">
           <p className="font-semibold font-jakarta text-xs text-[#BBBDD2]">
             FAT
           </p>
           <ChevronDownIcon />
         </div>
-        <div className=" h-full flex flex-row items-center ">
+        <div className=" h-full flex flex-row items-center text-left  w-[5vw] ">
           <p className="font-semibold font-jakarta text-xs text-[#BBBDD2]">
             SUGAR
           </p>
           <ChevronDownIcon />
         </div>
       </div>
-    </div>
+      </div>
+    
   );
 };
 

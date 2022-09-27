@@ -31,48 +31,51 @@ const MealRow : React.FC<{ mealUnsplitted : string,  valueMeals: string[], value
 
 
   return (
-    <div className="w-full min-h-[8vh] flex flex-row bg-white items-center">
+    <div className="w-full min-h-[8vh] overflow-x-hidden flex flex-row bg-white items-center justify-between">
+      <div className='flex flex-row'>
       <div className="w-[4vw] items-center justify-center h-full flex">
         <Checkbox size='lg' className="mx-4" colorScheme="messenger" isChecked={isChecked}  onChange={(event: ChangeEvent<HTMLInputElement>) => setChecked(event.target.checked)}  />
       </div>
-      <div className="w-[25vw]  h-full flex flex-row items-center  px-4 ">
-        <p className="font-semibold font-jakarta text-xs ">
+
+      <div className="w-[8vw]  h-full flex flex-row  ml-4 ">
+        <p className="font-semibold truncate  font-jakarta text-xs ">
           {props.valueMeals && props.valueMeals[2]}
         </p>
-      
       </div>
-      <div className="w-[40vw]  h-full flex flex-row items-center px-2 ">
-        <p className="font-semibold font-jakarta text-xs ">
+      </div>
+
+      <div className=" h-full flex flex-row w-[10vw] ml-[4vw]  ">
+        <p className="font-semibold font-jakarta text-xs  text-left  ">
          {props.valueMeals && props.valueMeals[4]}
         </p>
-       
       </div>
-      <div className="w-full flex flex-row space-x-[4vw] mr-[3vw]">
-        <div className="h-full flex flex-row items-center px-2 ">
+
+      <div className="w-full flex flex-row  ml-[13vw] justify-between">
+        <div className="h-full w-[5.5vw] text-left flex flex-row items-center  ">
           <p className="font-semibold font-jakarta text-xs ">
           {nutrients && nutrients[2]}
           </p>
           
         </div>
-        <div className=" h-full flex flex-row items-center  ">
+        <div className=" h-full w-[5vw] text-left  flex flex-row items-center  ">
           <p className="font-semibold font-jakarta text-xs ">
           {nutrients && nutrients[3]}
           </p>
          
         </div>
-        <div className="  h-full flex flex-row items-center ">
+        <div className="  h-full w-[5vw] flex text-left  flex-row items-center ">
           <p className="font-semibold font-jakarta text-xs ">
           {nutrients && nutrients[4]}
           </p>
          
         </div>
-        <div className="  h-full flex flex-row items-center ">
+        <div className="  h-full w-[5vw] flex text-left  flex-row items-center ">
           <p className="font-semibold font-jakarta text-xs ">
           {nutrients && nutrients[5]}
           </p>
           
         </div>
-        <div className=" h-full flex flex-row items-center ">
+        <div className=" h-full w-[5vw] flex text-left  flex-row items-center ">
           <p className="font-semibold font-jakarta text-xs ">
           {nutrients && nutrients[6]}
           </p>
