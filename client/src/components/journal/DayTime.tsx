@@ -1,5 +1,9 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
   Button,
   Input,
   InputGroup,
@@ -17,8 +21,10 @@ import { getDatasetAtEvent } from "react-chartjs-2";
 import { getMealTypes } from "../../actions/mealAction";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
-const DayTime : React.FC<{selectIndex : ( id: number) => void, setHasMeal: Dispatch<SetStateAction<boolean>>}> = (props) => {
-
+const DayTime: React.FC<{
+  selectIndex: (id: number) => void;
+  setHasMeal: Dispatch<SetStateAction<boolean>>;
+}> = (props) => {
   const [date, setDate] = useState<string>(
     new Date().toLocaleDateString().toString()
   );
@@ -27,7 +33,6 @@ const DayTime : React.FC<{selectIndex : ( id: number) => void, setHasMeal: Dispa
 
   const dispatch = useAppDispatch();
   const meals = useAppSelector((state) => state.meal);
-
 
   const addNewMealType = (mealType: Type) => {
     const now: Date = new Date();
@@ -47,7 +52,6 @@ const DayTime : React.FC<{selectIndex : ( id: number) => void, setHasMeal: Dispa
     };
 
     dispatch(createJournal(meal, dateTime, headers));
-    
   };
 
   const getData = (e: React.FormEvent<HTMLInputElement>) => {
@@ -65,7 +69,6 @@ const DayTime : React.FC<{selectIndex : ( id: number) => void, setHasMeal: Dispa
   };
 
   useEffect(() => {
-    
     const currentDate: string =
       new Date().getFullYear() +
       "-" +
@@ -87,37 +90,23 @@ const DayTime : React.FC<{selectIndex : ( id: number) => void, setHasMeal: Dispa
 
   return (
     <div className="w-[20vw] flex flex-col ">
-      <div className="bg-white flex flex-row w-full h-[6vh] items-center justify-between">
-        <div className="w-[14vw] ">
-          <InputGroup width={{ md: "14vw" }}>
-            <InputLeftElement
-              pointerEvents="none"
-              children={<CalendarIcon color="gray.300" />}
-            />
-            <Input
-              type="date"
-              placeholder="Enter date"
-              value={date}
-              onChange={getData}
-            />
-          </InputGroup>
-        </div>
-
-        {/* <Button colorScheme="teal" variant="outline" width={{ md: "6vw" }}>
-          Add
-        </Button> */}
-
-        <Menu>
+      <div className="flex flex-col items-center">
+        <Menu direction="rtl">
           <MenuButton
-            color="teal"
-            variant="outline"
+            width="100%"
+            height="3.5rem"
+            color="white"
+            bgColor="#4075F8"
             as={Button}
+            rounded="false"
+            _focus={{ boxShadow: "none" }}
             rightIcon={<ChevronDownIcon />}
-            //onClick={addNewMealType}
           >
-            Add
+            <p className="text-sm font-jakarta font-semibold">
+              Add another category
+            </p>
           </MenuButton>
-          <MenuList>
+          <MenuList zIndex="10">
             <MenuItem onClick={() => addNewMealType(Type.BREAKFAST)}>
               Breakfast
             </MenuItem>
@@ -138,15 +127,59 @@ const DayTime : React.FC<{selectIndex : ( id: number) => void, setHasMeal: Dispa
             </MenuItem>
           </MenuList>
         </Menu>
+
+        <InputGroup>
+          <InputLeftElement
+            pointerEvents="none"
+            children={<CalendarIcon color="gray.300" />}
+          />
+          <Input
+            _focus={{ boxShadow: "none" }}
+            rounded="false"
+            type="date"
+            placeholder="Enter date"
+            value={date}
+            onChange={getData}
+          />
+        </InputGroup>
       </div>
 
       <div className="flex w-full h-[100vh] flex-col overflow-auto ">
         {meals.length === 0 ? (
-          <p>No data added</p>
+          <Alert
+          status='error'
+          variant='subtle'
+          flexDirection='column'
+          alignItems='center'
+          justifyContent='center'
+          textAlign='center'
+          height='100%'
+          
+        >
+          <div className="flex space-y-4 flex-col items-center">
+          <AlertIcon boxSize='40px' mr={0} />
+          <p className="text-lg font-jakarta font-bold">No category added!</p>
+          <p className="font-jakarta">
+            Choose a date and a category to add meals.
+          </p>
+          </div>
+        </Alert>
         ) : (
-          meals.map((value: AllMeals, index) => (
-            value && <MealTypeItem meals={value.meal} hour={value.hour} id={value.id} type={value.type} selectIndex={props.selectIndex} index={index} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex}   />
-          ))
+          meals.map(
+            (value: AllMeals, index) =>
+              value && (
+                <MealTypeItem
+                  meals={value.meal}
+                  hour={value.hour}
+                  id={value.id}
+                  type={value.type}
+                  selectIndex={props.selectIndex}
+                  index={index}
+                  selectedIndex={selectedIndex}
+                  setSelectedIndex={setSelectedIndex}
+                />
+              )
+          )
         )}
       </div>
     </div>

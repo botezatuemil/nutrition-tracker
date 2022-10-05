@@ -21,20 +21,20 @@ export const mealTotalSlice = createSlice({
         state.sugar = 0;
     },
     add : (state, action) => {
-        state.calories += action.payload.calories;
-        state.carbs += action.payload.carbs;
-        state.fat += action.payload.fat;
-        state.protein += action.payload.protein;
-        state.sugar += action.payload.sugar;
+        state.calories += parseInt(action.payload.calories);
+        state.carbs += parseInt(action.payload.carbs);
+        state.fat += parseInt(action.payload.fat);
+        state.protein += parseInt(action.payload.protein);
+        state.sugar += parseInt(action.payload.sugar);
 
         return state;
     },
     substract : (state, action) => {
-      state.calories -= action.payload.calories;
-      state.carbs -= action.payload.carbs;
-      state.fat -= action.payload.fat;
-      state.protein -= action.payload.protein;
-      state.sugar -= action.payload.sugar;
+      state.calories -= parseInt(action.payload.calories);
+      state.carbs -= parseInt(action.payload.carbs);
+      state.fat -= parseInt(action.payload.fat);
+      state.protein -= parseInt(action.payload.protein);
+      state.sugar -= parseInt(action.payload.sugar);
 
       return state;
   }

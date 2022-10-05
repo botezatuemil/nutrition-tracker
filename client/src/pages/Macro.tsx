@@ -20,7 +20,7 @@ import Water from  "../components/water/Water";
 import History from "../components/history/History";
 
 const Macro = () => {
-  const [macros, setMacros] = useState<Boolean>(false);
+  const [macros, setMacros] = useState<Boolean>(true);
   const [journal, setJournal] = useState<Boolean>(false);
   const [recipes, setRecipes] = useState<Boolean>(false);
   const [water, setWater] = useState<Boolean>(false);
@@ -45,7 +45,7 @@ const Macro = () => {
       <div className="flex w-[20vw]  bg-[#F2F4F6] items-center flex-col justify-between ">
         <div className="flex justify-center flex-row items-center h-[10vh] space-x-4">
           <Logo width={50} height={50} />
-          <p className="font-bold font-Jakarta text-xl ">NutriTrack</p>
+          <p className="font-bold font-jakarta text-xl ">NutriTrack</p>
         </div>
 
         <div className="mt-[60px] w-full ">
@@ -83,12 +83,6 @@ const Macro = () => {
         </div>
 
         <div className="flex flex-col w-full mt-[130px]  ">
-          <div className="flex-row flex space-x-3 ml-[2.5vw] h-[6vh] ">
-            <Settings width={25} height={25} />
-            <p className="font-jakarta font-semibold cursor-pointer" onClick={handleNavigateSettings}>
-              Settings
-            </p>
-          </div>
           <div className=" flex-row flex space-x-3 h-[6vh] ml-[2.5vw] ">
             <Logout width={25} height={25} />
             <p className="font-jakarta font-semibold cursor-pointer">Log out</p>

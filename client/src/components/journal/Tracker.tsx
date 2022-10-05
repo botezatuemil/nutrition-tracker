@@ -10,7 +10,7 @@ const Tracker: React.FC<{
   nutrients: string[] | undefined;
 }> = (props) => {
   return (
-    <div className="flex flex-col w-full h-full bg-[#F4F5FC]">
+    <div className="flex flex-col w-full h-full bg-[#F4F5FC] items-center">
       <Header nutrients={props.nutrients} selectIndex={props.selectIndex} index={props.index} />
       <MealTracker
         meals={props.meals}

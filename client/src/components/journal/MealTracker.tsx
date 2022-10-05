@@ -7,31 +7,43 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { add, initialize } from "../../store/mealTotal";
 import { addChecked, clearSelectedMeals } from "../../store/checkedMeals";
 
+import {
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+  Alert,
+} from "@chakra-ui/react";
+
 const MealTracker: React.FC<{
   meals: string[] | undefined;
   nutrients: string[] | undefined;
   index: number;
 }> = (props) => {
-
   const dispatch = useAppDispatch();
   const nutrients: Nutrients = useAppSelector((state) => state.mealTotal);
   const dailyNutrients: Nutrients = useAppSelector((state) => state.user);
 
-
   useEffect(() => {
     dispatch(initialize());
     dispatch(clearSelectedMeals());
-    props.nutrients?.map((value) => {
+
+    props.nutrients?.map((value, idx) => {
       const splitNutrients = value.split(/[(,)]/);
 
-      const nutrients: Nutrients = {
-        calories: parseInt(splitNutrients[2]),
-        protein: parseInt(splitNutrients[3]),
-        carbs: parseInt(splitNutrients[4]),
-        fat: parseInt(splitNutrients[5]),
-        sugar: parseInt(splitNutrients[6]),
-      };
-      dispatch(add(nutrients));
+      if (props.meals !== undefined) {
+
+        const splittedMeals = props.meals[idx].split(/[(,)]/);
+        console.log(splittedMeals[4]);
+        
+        const nutrients: Nutrients = {
+          calories: parseInt(splitNutrients[2]) * parseInt(splittedMeals[4]),
+          protein: parseInt(splitNutrients[3]) * parseInt(splittedMeals[4]),
+          carbs: parseInt(splitNutrients[4]) * parseInt(splittedMeals[4]),
+          fat: parseInt(splitNutrients[5]) * parseInt(splittedMeals[4]),
+          sugar: parseInt(splitNutrients[6]) * parseInt(splittedMeals[4]),
+        };
+        dispatch(add(nutrients));
+      }
     });
   }, [props.index]);
 
@@ -63,7 +75,25 @@ const MealTracker: React.FC<{
               );
             })
           ) : (
-            <p>No meals added</p>
+            <Alert
+              status="error"
+              variant="subtle"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+              textAlign="center"
+              height="100%"
+            >
+              <div className="space-y-2 flex flex-col items-center">
+                <AlertIcon boxSize="40px" mr={0} />
+                <p className="font-jakarta font-bold text-xl">
+                  No meals added!
+                </p>
+                <p className="font-jakarta">
+                  To add a new meal press the top right button{" "}
+                </p>
+              </div>
+            </Alert>
           )}
         </div>
         <div className="space-y-1 mt-6">
@@ -95,14 +125,14 @@ const MealTracker: React.FC<{
             text="text-[#9E6E6D]"
             name="Remaining"
             nutrients={{
-              fat: dailyNutrients.fat -nutrients.fat ,
+              fat: dailyNutrients.fat - nutrients.fat,
               sugar: dailyNutrients.sugar - nutrients.sugar,
               protein: dailyNutrients.protein - nutrients.protein,
               carbs: dailyNutrients.carbs - nutrients.carbs,
               calories: dailyNutrients.calories - nutrients.calories,
             }}
           />
-          </div>
+        </div>
       </div>
     </div>
   );

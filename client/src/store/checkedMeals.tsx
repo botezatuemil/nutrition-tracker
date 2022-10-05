@@ -14,6 +14,8 @@ export const checkedSlice = createSlice({
       return state;
     },
     addChecked : (state, action) => {
+      console.log(state);
+      
         return [...state, action.payload];
     },
     removeChecked : (state, action) => {

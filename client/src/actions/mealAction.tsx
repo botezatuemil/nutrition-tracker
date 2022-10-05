@@ -20,8 +20,8 @@ import {
   deleteMeals,
   deleteMealType,
 } from "../store/meal";
-
-
+import { addToLastProducts } from "../store/lastProducts";
+import { fetch } from "../store/lastProducts";
 export const getMealTypes =
   (date: DateTime, headers: Object) => async (dispatch: any) => {
     try {
@@ -34,15 +34,19 @@ export const getMealTypes =
   };
 
 export const addMealJournal =
-  (meal: Meal, nutrients: NutrientsRef, headers: Object) =>
+  (meal: Meal, nutrients: NutrientsRef, headers: Object, addToLast : boolean) =>
   async (dispatch: any) => {
     try {
       const newMeal = await api.addMealJournal(meal, nutrients, headers);
       dispatch(updateMeals(newMeal));
+      if (addToLast) {
+        dispatch(addToLastProducts(newMeal));
+      }
     } catch (error) {
       console.log(error);
     }
   };
+
 
 export const deleteMeal =
   (checkedMeals: string[], headers: Object) => async (dispatch: any) => {
@@ -104,3 +108,22 @@ export const fetchChartData = async (startDate: Date, endDate: Date, headers: an
     console.log(error);
   }
 };
+
+export const createCopy =  (meals : string[], headers: any ) => async(dispatch : any) => {
+  try {
+    await api.createCopy(meals, headers);
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+
+export const getLastProducts = (headers: any) => async (dispatch: any) => {
+  try {
+    const meals = (await api.getLastProducts(headers)).data;
+    dispatch(fetch(meals));
+   
+  } catch (error) {
+    console.log(error);
+  }
+}

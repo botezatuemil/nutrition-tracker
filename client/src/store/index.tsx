@@ -7,6 +7,7 @@ import checkedMeals from "./checkedMeals";
 import recipes from "./recipe";
 import water from "./waterGoal";
 import drinkedWater from "./drinkedWater";
+import lastProducts from "./lastProducts";
 
 const store = configureStore({
   reducer: {
@@ -17,7 +18,8 @@ const store = configureStore({
     checkedMeals,
     recipes,
     water,
-    drinkedWater
+    drinkedWater,
+    lastProducts
 }})
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -24,11 +24,9 @@ const MealTypeItem: React.FC<{
   if (props.meals !== null)
     countMeals = props.meals.split(":").length;
 
-  console.log(countMeals)
-
   return (
     <div
-      className={`flex  w-full min-h-[25vh] cursor-pointer justify-center flex-col  px-10  ${
+      className={`flex  w-full min-h-[20vh] cursor-pointer justify-center flex-col px-10  ${
         props.selectedIndex === props.index ? "bg-white" : "bg-[#EBF0F8]"
       }`}
       onClick={handleClick}

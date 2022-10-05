@@ -57,5 +57,13 @@ export const deleteRecipe = (id: number, headers: any) => async (dispatch: any) 
   } catch (error) {
     console.log(error);
   }
+}
 
+export const addMealToRecipe = (meals : string[], headers: any) => async (dispatch: any) => {
+  try {
+    const recipe = await api.addMealToRecipe(meals, headers);
+    //dispatch(saveMealToRecipe);
+  } catch (error) {
+    console.log(error);
+  }
 }

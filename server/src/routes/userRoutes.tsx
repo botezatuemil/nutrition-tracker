@@ -1,7 +1,7 @@
 import express from "express";
 import { register, login, calculateMacros, getMacros } from '../controllers/users';
-import {addJournal, getMeals, addMeal, deleteMeal, deleteMealbyId} from '../controllers/meal';
-import {addRecipe, getAllRecipes, addMealTypeToRecipe, deleteRecipe} from '../controllers/recipe';
+import {addJournal, getMeals, addMeal, deleteMeal, deleteMealbyId, createCopy, getLastProducts} from '../controllers/meal';
+import {addRecipe, getAllRecipes, addMealTypeToRecipe, deleteRecipe, mealToRecipe} from '../controllers/recipe';
 import {editWaterGoal, addWater, fetchWaterData} from '../controllers/water';
 import {fetchChartData} from '../controllers/nutrients';
 import { verifyJWT } from "../middleware/auth";
@@ -24,5 +24,8 @@ router.post('/fetchChartData', verifyJWT, fetchChartData);
 router.post('/editWaterGoal', verifyJWT, editWaterGoal);
 router.post('/addWater', verifyJWT, addWater);
 router.post('/fetchWaterData', verifyJWT, fetchWaterData);
+router.post('/mealToRecipe', verifyJWT, mealToRecipe);
+router.post('/createCopy', verifyJWT, createCopy);
+router.get('/getLastProducts', verifyJWT, getLastProducts);
 export default router;
 

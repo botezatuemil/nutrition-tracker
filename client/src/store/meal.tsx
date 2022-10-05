@@ -24,17 +24,17 @@ export const mealsSlice = createSlice({
 
     updateMeals: (state, action: any) => {
       const result: AllMeals[] = state.map((value) =>
-        value.id === action.payload.data[0].id
+        value.id === action.payload.data.id
           ? {
               ...value,
               nutrients:
                 value.nutrients != null && value.nutrients !== ""
-                  ? value.nutrients + ":" + action.payload.data[0].nutrients
-                  : action.payload.data[0].nutrients,
+                  ? value.nutrients + ":" + action.payload.data.nutrients
+                  : action.payload.data.nutrients,
               meal:
                 value.meal != null && value.meal !== ""
-                  ? value.meal + ":" + action.payload.data[0].meal
-                  : action.payload.data[0].meal,
+                  ? value.meal + ":" + action.payload.data.meal
+                  : action.payload.data.meal,
             }
           : value
       );
@@ -109,6 +109,7 @@ export const mealsSlice = createSlice({
       console.log(result);
       return [...result];
     },
+    
   },
 });
 

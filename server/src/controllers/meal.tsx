@@ -119,13 +119,13 @@ export const addMeal = async (
     >`INSERT INTO meal (name, meal_type_id, nutrient_id, amount) VALUES (${mealFront.name}, ${mealFront.meal_type_id}, ${nutrient_id[0].id}, ${mealFront.amount}::INTEGER) RETURNING id`;
 
     const newMeal =
-      await prisma.$queryRaw<AllMeals>`SELECT meal_type.id, meal_type.hour, meal_type.type, meal::varchar, nutrients::varchar from meal_type
+      await prisma.$queryRaw<AllMeals[]>`SELECT meal_type.id, meal_type.hour, meal_type.type, meal::varchar, nutrients::varchar from meal_type
     left join meal on meal.meal_type_id = meal_type.id
     left join nutrients on nutrients.id = meal.nutrient_id
     where meal.id = ${meal_id[0].id}`;
 
     console.log(newMeal);
-    res.send(newMeal)
+    res.send(newMeal[0]);
 
     
   } catch (error) {
@@ -164,5 +164,29 @@ export const deleteMealbyId = async (req: Request, res: Response) => {
 
   } catch (error) {
     console.log(error)
+  }
+}
+
+export const createCopy = async (req: Request, res: Response) => {
+  try {
+    
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const getLastProducts = async (req: Request, res: Response) => {
+  try {
+    const lastProducts  = await prisma.$queryRaw<AllMeals[]>`
+    select meal_type.id,  meal_type.hour,  meal_type.type, meal::varchar, nutrients::varchar
+    from meal_type
+    inner join meal on meal.meal_type_id = meal_type.id
+    inner join nutrients on nutrients.id = meal.nutrient_id
+    order by meal_type.id desc limit 5
+    `
+
+    res.send(lastProducts);
+  } catch (error) {
+    console.log(error);
   }
 }

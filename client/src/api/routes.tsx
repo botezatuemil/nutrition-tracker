@@ -19,3 +19,6 @@ export const fetchChartData = (startDate: Date, endDate: Date, headers: any) => 
 export const editWaterGoal = (liters: number, headers: any) => axios.post(`${url}/editWaterGoal`, {liters}, {headers});
 export const addWater = (liters: number, date: Date, headers: any) => axios.post(`${url}/addWater`, {liters, date}, {headers});
 export const fetchWaterData = (startDate: Date, endDate: Date, headers: any) => axios.post(`${url}/fetchWaterData`, {startDate, endDate}, {headers})
+export const addMealToRecipe = (meals : string[], headers: any) => axios.post(`${url}/mealToRecipe`, {meals}, {headers})
+export const createCopy = (meals : string[], headers: any) => axios.post(`${url}/createCopy`, {meals}, {headers})
+export const getLastProducts = (headers: any) => axios.get(`${url}/getLastProducts`,  {headers})

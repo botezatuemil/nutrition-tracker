@@ -91,3 +91,24 @@ export const deleteRecipe = async (req: Request, res: Response) => {
     console.log(error);
   }
 }
+
+export const helper = async(mealSplitted : string[], user_id : number) => {
+  await prisma.$queryRaw`INSERT into recipe (meal_id, user_id) values (${mealSplitted[1]}::INTEGER, ${user_id})`
+}
+
+export const mealToRecipe = async (req: Request, res: Response) => {
+  try {
+    const meals: string[] = req.body.meals;
+    const user : User_Session = res.locals.user_id;
+    meals.map(value => {
+      const mealSplitted = value.split(/[(,)]/);
+      console.log(mealSplitted);
+      helper(mealSplitted, user.user_id);
+    })
+
+    res.send("Meals added succesfully");
+    
+  } catch (error) {
+    console.log(error);
+  }
+}

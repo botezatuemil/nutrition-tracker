@@ -9,13 +9,10 @@ const MealRow : React.FC<{ mealUnsplitted : string,  valueMeals: string[], value
   const nutrients = props.valueNutrients?.split(/[(,)]/)
   const [isChecked, setChecked] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-  // console.log(props.mealUnsplitted)
-  // console.log(props.valueNutrients);
 
   useEffect(() => {
     
     if (isChecked) {
-      console.log(props.mealUnsplitted)
       dispatch(addChecked(props.mealUnsplitted));
     } else {
       dispatch(removeChecked(props.mealUnsplitted));

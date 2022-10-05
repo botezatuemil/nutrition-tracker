@@ -46,20 +46,23 @@ const ModalMeal: React.FC<{
       "x-access-token": localStorage.getItem("token")!,
     };
 
-    dispatch(addMealJournal(meal, nutrients, headers));
+    const addToLast : boolean = true;
+
+    dispatch(addMealJournal(meal, nutrients, headers, addToLast));
     if (
       kcal.current !== null &&
       carbs.current !== null &&
       fat.current !== null &&
       protein.current !== null &&
-      sugar.current !== null
+      sugar.current !== null &&
+      amount.current !== null
     ) {
       const nutrientsToAdd : Nutrients = {
-        calories : parseInt(kcal.current.value),
-        protein : parseInt(protein.current.value),
-        carbs : parseInt(carbs.current.value),
-        fat: parseInt(fat.current.value),
-        sugar: parseInt(sugar.current.value),
+        calories : parseInt(kcal.current.value) * parseInt(amount.current?.value),
+        protein : parseInt(protein.current.value) * parseInt(amount.current?.value),
+        carbs : parseInt(carbs.current.value) * parseInt(amount.current?.value),
+        fat: parseInt(fat.current.value) * parseInt(amount.current?.value),
+        sugar: parseInt(sugar.current.value) * parseInt(amount.current?.value),
       }
       dispatch(add(nutrientsToAdd));
     }

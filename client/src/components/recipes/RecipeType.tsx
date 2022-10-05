@@ -2,6 +2,9 @@ import React, {useState} from "react";
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import { useAppDispatch } from "../../store/hooks";
 import {deleteRecipe} from  '../../actions/recipeAction';
+import { RiDeleteBinLine } from "react-icons/ri";
+import {  AddIcon } from "@chakra-ui/icons";
+
 const RecipeType: React.FC<{
   id: number;
   name: string  | undefined;
@@ -41,9 +44,11 @@ const RecipeType: React.FC<{
           Info
         </Button>
 
-        <Button size="sm" onClick={deleteRecipeHandler}>-</Button>
-        <p>3</p>
-        <Button size="sm" backgroundColor="#35BB89" color="white">
+        <Button size="sm" onClick={deleteRecipeHandler}>
+          <RiDeleteBinLine/>
+        </Button>
+        <p>0</p>
+        <Button size="sm" backgroundColor="#35BB89" color="white" >
           +
         </Button>
       </div>

@@ -20,9 +20,9 @@ const Recipes = () => {
 
     console.log(headers);
 
-    if (recipes.length === 0) {
+    //if (recipes.length === 0) {
       dispatch(getAllRecipes(headers));
-    }
+    //}
   }, [dispatch]);
 
   return (
@@ -31,15 +31,15 @@ const Recipes = () => {
       <div className="flex flex-col h-full w-full p-10 ">
         <Button
           variant="solid"
-          backgroundColor="#35BB89"
+          backgroundColor="#4075F8"
           color="white"
-          width="6vw"
-          height="30px"
+          width="7vw"
+          height="35px"
           onClick={() => setShowModal(true)}
         >
-          Add recipe
+          <p className="font-jakarta text-sm">Add recipe</p>
         </Button>
-        <TableFunctions />
+        <TableFunctions recipes={recipes} />
         <div className="flex space-y-2 flex-col overflow-auto h-[75vh]">
           {recipes.map((value) => (
             <RecipeType

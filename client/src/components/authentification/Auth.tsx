@@ -38,20 +38,20 @@ const Auth: React.FC<{ title: string; buttonAction: string; handleSign: (user : 
 
   return (
     <form className="flex bg-white col-span-3 flex-col items-center">
-      <h1 className="font-Jakarta font-semibold text-5xl mt-[20vh]">
+      <h1 className="font-jakarta font-semibold text-5xl mt-[20vh]">
         {props.title}
       </h1>
       <div className="mt-[20vh] w-7/12 flex flex-col space-y-[3vh]">
         {pathname === "/signup" && (
           <input
-            className="bg-[#F2F4F6] p-4 font-Jakarta text-black rounded-full text-xs px-10"
+            className="bg-[#F2F4F6] p-4 font-jakarta text-black rounded-full text-xs px-10"
             placeholder="Enter your full name"
             onChange={(e : React.FormEvent<HTMLInputElement>) => setFullname(e.currentTarget.value)}
           />
         )}
 
         <input
-          className="bg-[#F2F4F6] p-4 font-Jakarta text-black rounded-full text-xs px-10"
+          className="bg-[#F2F4F6] p-4 font-jakarta text-black rounded-full text-xs px-10"
           placeholder="Enter your email address"
           type="email"
           onChange={(e : React.FormEvent<HTMLInputElement>) => setEmail(e.currentTarget.value)}
@@ -80,7 +80,7 @@ const Auth: React.FC<{ title: string; buttonAction: string; handleSign: (user : 
         </div>
 
         {pathname === '/login' && 
-          <p className="text-[#535353] place-self-end text-xs cursor-pointer font-Jakarta font-semibold">Forgot password?</p>
+          <p className="text-[#535353] place-self-end text-xs cursor-pointer font-jakarta font-semibold">Forgot password?</p>
         }
       </div>
       <button className="bg-[#535353] w-3/12 p-3 text-white text-xs rounded-full mt-[10vh]" onClick={handleSignUser}>
