@@ -49,3 +49,21 @@ export const editWaterGoal = (liters: number, headers: Object) => async (dispatc
       console.log(error);
     }
   }
+
+  export const getWaterGoal = (headers : any) => async(dispatch : any) => {
+    try {
+      const goal: number = (await api.getWaterGoal(headers)).data.liters;
+      dispatch(getGoal(goal));
+    } catch (error) {
+     console.log(error) 
+    }
+  }
+
+  export const getWater = (headers : any) => async(dispatch : any) => {
+    try {
+      const water: number = (await api.getWater(headers)).data.amount;
+      dispatch(getDrinkedWater(water));
+    } catch (error) {
+      console.log(error);
+    }
+  }

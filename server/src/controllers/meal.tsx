@@ -134,10 +134,10 @@ export const addMeal = async (
 };
 
 export const deleteMealDatabase = async(id: string) => {
-  await prisma.$queryRaw`DELETE FROM meal where meal.id = ${id}::INTEGER`; //to test on liner
+  await prisma.$queryRaw`DELETE FROM meal where meal.id = ${id}::INTEGER`; 
 }
 
-export const deleteMeal = async (req: Request, res: Response) => { //nu mai umbla aici!
+export const deleteMeal = async (req: Request, res: Response) => { 
   try {
 
     const meals : string[] = req.body;

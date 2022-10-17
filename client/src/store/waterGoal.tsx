@@ -9,6 +9,7 @@ export const waterSlice = createSlice({
     getGoal : (state, action: any) => {
         return action.payload;
     },
+    
   },
 });
 

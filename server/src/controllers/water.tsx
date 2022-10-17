@@ -44,8 +44,8 @@ export const addWater = async (req: Request, res: Response) => {
     const user: User_Session = res.locals.user_id;
 
     const dateDb: DateTimeDB[] = await prisma.$queryRaw<
-      DateTimeDB[]
-    >`SELECT date.id FROM date WHERE date.date = ${date}::date`;
+    DateTimeDB[]
+    >`SELECT date.id FROM date WHERE date.date = ${date}::DATE`;
 
     console.log(dateDb);
 
@@ -54,7 +54,7 @@ export const addWater = async (req: Request, res: Response) => {
     if (dateDb.length === 0) {
       const dateId: [{ id: number }] = await prisma.$queryRaw<
         [{ id: number }]
-      >`INSERT INTO date (date) VALUES (${date}::date) RETURNING id`;
+      >`INSERT INTO date (date) VALUES (${date}::DATE) RETURNING id`;
 
       journalId = await prisma.$queryRaw<
         [{ id: number }]
@@ -100,3 +100,39 @@ export const fetchWaterData = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
+
+export const getWaterGoal = async (req: Request, res: Response) => {
+  try {
+    const user: User_Session = res.locals.user_id;
+    const goal = await prisma.$queryRaw<{liters: number}[]>`select water_goal.liters from water_goal where water_goal.user_id = ${user.user_id}`;
+    console.log(goal[0].liters);
+    res.send(goal[0]);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const getWater = async (req: Request, res: Response) => {
+  try {
+
+    const date: string = new Date().toDateString();
+    const user: User_Session = res.locals.user_id;
+
+    const dateDb: DateTimeDB[] = await prisma.$queryRaw<
+    DateTimeDB[]
+    >`SELECT date.id FROM date WHERE date.date = ${date}::DATE`;
+
+    const journalId = await prisma.$queryRaw<
+        [{ id: number }]
+      >`SELECT journal.id from journal, date WHERE journal.date_id = ${dateDb[0].id} AND user_id = ${user.user_id} `;
+    
+
+    const data = await prisma.$queryRaw<
+      { amount: number }[]
+    >`Select water.amount from water where water.journal_id = ${journalId[0].id}`;
+   
+    res.send(data[0]);
+  } catch (error) {
+    console.log(error);
+  }
+}

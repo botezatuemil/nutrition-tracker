@@ -2,7 +2,7 @@ import express from "express";
 import { register, login, calculateMacros, getMacros } from '../controllers/users';
 import {addJournal, getMeals, addMeal, deleteMeal, deleteMealbyId, createCopy, getLastProducts} from '../controllers/meal';
 import {addRecipe, getAllRecipes, addMealTypeToRecipe, deleteRecipe, mealToRecipe} from '../controllers/recipe';
-import {editWaterGoal, addWater, fetchWaterData} from '../controllers/water';
+import {editWaterGoal, addWater, fetchWaterData, getWaterGoal, getWater } from '../controllers/water';
 import {fetchChartData} from '../controllers/nutrients';
 import { verifyJWT } from "../middleware/auth";
 const router = express.Router();
@@ -27,5 +27,7 @@ router.post('/fetchWaterData', verifyJWT, fetchWaterData);
 router.post('/mealToRecipe', verifyJWT, mealToRecipe);
 router.post('/createCopy', verifyJWT, createCopy);
 router.get('/getLastProducts', verifyJWT, getLastProducts);
+router.get('/getWaterGoal', verifyJWT, getWaterGoal);
+router.get('/getWater', verifyJWT, getWater);
 export default router;
 

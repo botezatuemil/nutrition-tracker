@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect } from 'react'
 import { buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar'
+import { getWater, getWaterGoal } from '../../actions/waterAction';
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 
 const Services : React.FC<{  setShowGoal : Dispatch<SetStateAction<boolean>>, setShowAddDrink : Dispatch<SetStateAction<boolean>> }> = (props) => {
@@ -10,8 +11,12 @@ const Services : React.FC<{  setShowGoal : Dispatch<SetStateAction<boolean>>, se
   const drinkedWater = useAppSelector(state => state.drinkedWater);
   
   useEffect(() => {
-    
-    //function to fetch data from db
+    const headers = {
+      "x-access-token": localStorage.getItem("token")!,
+    };
+    dispatch(getWaterGoal(headers));
+    dispatch(getWater(headers));
+   
   }, [])
   
 
@@ -31,12 +36,13 @@ const Services : React.FC<{  setShowGoal : Dispatch<SetStateAction<boolean>>, se
 
           <div className="w-[12vw]">
             <CircularProgressbarWithChildren
-              value={75}
+              value={drinkedWater}
+              maxValue={goal} 
               strokeWidth={4}
               styles={buildStyles({
                 pathTransitionDuration: 0.5,
-                pathColor: `rgba(255, 255, 255, ${75 / 100})`,
-                trailColor: "rgba(255, 255, 255, 0.3)",
+                pathColor: drinkedWater < goal ? "rgba(255, 255, 255, 1)" : "rgb(255, 96, 96)",
+                trailColor:  "rgba(255, 255, 255, 0.3)",
               })}
             >
               <p className="text-white font-Jakarta font-semibold text-3xl">
