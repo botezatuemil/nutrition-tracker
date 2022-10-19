@@ -36,9 +36,11 @@ const Macro = () => {
     setHistory(false);
   };
 
-  const handleNavigateSettings = () => {
-    navigate('/settings');
+  const logout = () => {
+    navigate('/login');
+    localStorage.removeItem("token");
   }
+  
   return (
     
     <div className="flex w-full min-h-screen bg-white ">
@@ -83,9 +85,9 @@ const Macro = () => {
         </div>
 
         <div className="flex flex-col w-full mt-[130px]  ">
-          <div className=" flex-row flex space-x-3 h-[6vh] ml-[2.5vw] ">
+          <div className=" flex-row flex space-x-3 h-[6vh] ml-[2.5vw] items-center">
             <Logout width={25} height={25} />
-            <p className="font-jakarta font-semibold cursor-pointer">Log out</p>
+            <button onClick={logout} className="font-jakarta font-semibold cursor-pointer">Log out</button>
           </div>
         </div>
       </div>

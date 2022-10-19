@@ -1,5 +1,5 @@
 import express from "express";
-import { register, login, calculateMacros, getMacros } from '../controllers/users';
+import { register, login, calculateMacros, getMacros, getUserName } from '../controllers/users';
 import {addJournal, getMeals, addMeal, deleteMeal, deleteMealbyId, createCopy, getLastProducts} from '../controllers/meal';
 import {addRecipe, getAllRecipes, addMealTypeToRecipe, deleteRecipe, mealToRecipe} from '../controllers/recipe';
 import {editWaterGoal, addWater, fetchWaterData, getWaterGoal, getWater } from '../controllers/water';
@@ -9,6 +9,7 @@ const router = express.Router();
 
 router.post('/register', register);
 router.post('/login', login);
+router.get('/getUserName',verifyJWT, getUserName);
 router.post('/calculateMacros', verifyJWT, calculateMacros);
 router.get('/getMacros', verifyJWT, getMacros);
 router.post('/addJournal', verifyJWT, addJournal);

@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { update, fetchAll } from '../store/meal'
 import { fetchMacros } from '../store/user'
 import { AnyAction } from "@reduxjs/toolkit";
+import { fetchUserName } from "../store/userName";
 
 
 export const registerUser = async (user: User) => {
@@ -59,3 +60,12 @@ export const getMacros = (headers: Object) => async (dispatch: any) => {
   }
 }
 
+export const getName = (headers: any) => async (dispatch: any) => {
+  try {
+    const name =  (await api.getUserName(headers)).data;
+
+    dispatch(fetchUserName(name));
+  } catch(error) {
+    console.log(error);
+  }
+} 

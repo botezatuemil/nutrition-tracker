@@ -4,6 +4,7 @@ const url = "http://localhost:5000";
 
 export const registerUser = (user: User) => axios.post(`${url}/register`, user);
 export const loginUser = (user: User) => axios.post(`${url}/login`, user);
+export const getUserName = (headers: any) => axios.get(`${url}/getUserName`, { headers });
 export const createProfile = (profile: Profile, nutrients: Nutrients, headers: any) => axios.post(`${url}/calculateMacros`, { objects: [profile, nutrients] },{ headers });
 export const getMacros  = (headers: any) => axios.get(`${url}/getMacros`, { headers });
 export const addJournal = (mealType: MealType, date: DateTime, headers: any,) => axios.post(`${url}/addJournal`,  {objects: [date, mealType]}, {headers});

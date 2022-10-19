@@ -147,3 +147,15 @@ export const getMacros = async (req: Request, res: Response) => {
     res.send(nutrientsUser);
   } catch (error) {}
 };
+
+export const getUserName = async (req: Request,res: Response) => {
+  try {
+    const user: User_Session = res.locals.user_id;
+    const name = await prisma.$queryRaw<{fullname: string}[]>`Select users.fullname from users where users.id = ${user.user_id}`;
+
+    res.send(JSON.stringify(name[0].fullname));
+
+  } catch (error) {
+    console.log(error);
+  }
+}
