@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   ButtonGroup,
@@ -25,6 +25,7 @@ const Macro = () => {
   const [recipes, setRecipes] = useState<Boolean>(false);
   const [water, setWater] = useState<Boolean>(false);
   const [history, setHistory] = useState<Boolean>(false);
+  const [isAuthentificated, setIsAuthentificated] = useState<Boolean>(true);
 
   const navigate = useNavigate();
 
@@ -40,11 +41,22 @@ const Macro = () => {
     navigate('/login');
     localStorage.removeItem("token");
   }
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    console.log(token);
+
+    if (token === null) {
+      setIsAuthentificated(false);
+    }
+  }, [])
   
   return (
     
     <div className="flex w-full min-h-screen bg-white ">
-      <div className="flex w-[20vw]  bg-[#F2F4F6] items-center flex-col justify-between ">
+      {isAuthentificated ? (
+        <>
+        <div className="flex w-[20vw]  bg-[#F2F4F6] items-center flex-col justify-between ">
         <div className="flex justify-center flex-row items-center h-[10vh] space-x-4">
           <Logo width={50} height={50} />
           <p className="font-bold font-jakarta text-xl ">NutriTrack</p>
@@ -97,6 +109,15 @@ const Macro = () => {
       {recipes && <Recipes/>}
       {water && <Water/>}
       {history && <History/>}
+
+        </>
+      ) : (
+        <div className="flex items-center flex-col justify-center w-full">
+          <p className="font-jakarta text-3xl">Not Found 404</p>
+          <p className="font-jakarta ">It looks like your page was not found </p>
+        </div>
+
+      )}
       
     </div>
   );
