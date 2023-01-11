@@ -70,37 +70,37 @@ const ModalMeal: React.FC<{
   };
 
   return (
-    <div className="absolute z-10 p-8  -translate-x-1/2 flex flex-col   -translate-y-1/2 left-1/2 top-1/2 backdrop-blur-md shadow-lg w-[40vw] rounded-xl bg-white h-[75vh]">
+    <div className="absolute z-10 p-8  -translate-x-1/2 flex flex-col   -translate-y-1/2 left-1/2 top-1/2 backdrop-blur-md shadow-lg w-[40vw] rounded-xl bg-white ">
       <p className="font-semibold  text-lg font-jakarta ">{props.title}</p>
-      <div className="flex flex-row items-center  mt-4 justify-between mr-[6vw]">
+      <div className="flex flex-row items-center  mt-4 justify-between ">
         <p className="font-jakarta ">Name</p>
         <Input ref={name} width={{ md: "25vw" }} type="text" />
       </div>
-      <div className="flex flex-row items-center  mt-4 justify-between mr-[6vw]">
+      <div className="flex flex-row items-center  mt-4 justify-between ">
         <p className="font-jakarta ">Amount</p>
         <Input ref={amount} width={{ md: "25vw" }} type="number" />
       </div>
-      <div className="flex flex-row items-center  mt-4 justify-between mr-[6vw]">
+      <div className="flex flex-row items-center  mt-4 justify-between ">
         <p className="font-jakarta ">Kcal</p>
         <Input ref={kcal} width={{ md: "25vw" }} type="number" />
       </div>
-      <div className="flex flex-row items-center  mt-4 justify-between mr-[6vw]">
+      <div className="flex flex-row items-center  mt-4 justify-between ">
         <p className="font-jakarta ">Protein</p>
         <Input ref={protein} width={{ md: "25vw" }} type="number" />
       </div>
-      <div className="flex flex-row items-center mt-4 justify-between mr-[6vw]">
+      <div className="flex flex-row items-center mt-4 justify-between ">
         <p className="font-jakarta ">Carbs</p>
         <Input ref={carbs} width={{ md: "25vw" }} type="number" />
       </div>
-      <div className="flex flex-row items-center justify-between mr-[6vw] mt-4">
+      <div className="flex flex-row items-center justify-between mt-4">
         <p className="font-jakarta ">Fat</p>
         <Input ref={fat} width={{ md: "25vw" }} type="number" />
       </div>
-      <div className="flex flex-row items-center justify-between mr-[6vw] mt-4">
+      <div className="flex flex-row items-center justify-between mt-4">
         <p className="font-jakarta ">Sugar</p>
         <Input ref={sugar} width={{ md: "25vw" }} type="number" />
       </div>
-      <div className="absolute bottom-0 right-0 flex flex-row space-x-2 pb-10 mr-10">
+      <div className="flex  flex-row space-x-2  justify-end mt-4">
         <Button variant="ghost" onClick={() => props.setShow(false)}>
           Cancel
         </Button>
